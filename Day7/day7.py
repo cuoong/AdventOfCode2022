@@ -26,10 +26,15 @@ for line in lines:
             directory = ''.join(path[:i])
             dict[directory] += file_size
 
-print(dict.items())
+total = dict['/']
+free = total - 40000000
+
 result = 0
+result1 = 1e9
 for key, value in dict.items():
+    if value >= free:
+        result1 = (min(result1, value))
+        print(key, value)
     if value <= 100000:
         result += value
-
-print(result)
+print(result1)
