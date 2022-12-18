@@ -16,7 +16,7 @@ numberOfColumns = len(line[0])
 
 edges = (numberOfRows * 2) + ((numberOfColumns - 2) * 2)
 result = 0
-
+scores = []
 
 for row in range(1, numberOfRows - 1):
     for column in range(1, numberOfColumns - 1):
@@ -35,4 +35,19 @@ for row in range(1, numberOfRows - 1):
         # print(down)
         if max(left) < position or max(right) < position or max(top) < position or max(down) < position:
             result += 1
+
+        score = 1
+        for list in (left, right, top, down):
+            maker = 0
+            for i in range(len(list)):
+
+                if list[i] < position:
+                    maker += 1
+                elif list[i] >= position:
+                    maker += 1
+                    break
+            score *= maker
+        scores.append(score)
+
+print(max(scores))
 print(result + edges)
